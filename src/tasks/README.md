@@ -7,6 +7,9 @@
 1. `01-js-basics` — база JavaScript: переменные, типы, условия, циклы, функции.
 2. `02-modern-js` — современный JavaScript: массивы, объекты, замыкания, `this`, `async/await`.
 3. `03-typescript-basics` — база TypeScript: типы, интерфейсы, generics, narrowing, utility types.
+4. `04-functions-objects` — функции, объекты, коллекции и группировка данных.
+5. `05-async-js` — Promise, thenable и базовая асинхронность.
+6. `06-interview-practice` — короткие задачи в стиле собеседований.
 
 ## Как проходить
 

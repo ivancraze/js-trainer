@@ -1,86 +1,22 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Alert, Button, Input, Layout, Space, Splitter, Tree, Typography } from 'antd'
+import { getPassedCount, getTaskStatus } from './taskTrainer/progress'
 import {
-  Alert,
-  Button,
-  Input,
-  Layout,
-  Space,
-  Splitter,
-  Tag,
-  Tree,
-  Typography,
-} from 'antd'
-import type { DataNode } from 'antd/es/tree'
-import { taskGroups, tasks, type Task, type TaskCheck } from './tasks/tasksRegistry'
+  getSavedCode,
+  getSavedStatuses,
+  saveTaskCode,
+  saveTaskStatuses,
+  type TaskStatuses,
+} from './taskTrainer/storage'
+import { getStatusTag, getTreeData } from './taskTrainer/taskTree'
+import { tasks, type Task, type TaskCheck } from './tasks/tasksRegistry'
 import './App.css'
 
 const { Header, Sider, Content } = Layout
 const { Text, Title, Paragraph } = Typography
 const { TextArea } = Input
 
-type TaskStatus = 'success' | 'failed'
-type TaskStatuses = Record<string, TaskStatus>
-
-function getSavedCode(task: Task): string {
-  return localStorage.getItem(`task-code:${task.id}`) ?? task.starterCode
-}
-
-function getSavedStatuses(): TaskStatuses {
-  const savedValue = localStorage.getItem('task-statuses')
-
-  if (!savedValue) {
-    return {}
-  }
-
-  try {
-    return JSON.parse(savedValue) as TaskStatuses
-  } catch {
-    return {}
-  }
-}
-
-function getStatusTag(status: TaskStatus | undefined) {
-  if (status === 'success') {
-    return <Tag color="success">Успешно</Tag>
-  }
-
-  if (status === 'failed') {
-    return <Tag color="error">Неуспешно</Tag>
-  }
-
-  return <Tag>Не проверено</Tag>
-}
-
-function getTreeData(statuses: TaskStatuses): DataNode[] {
-  return taskGroups.map((group) => ({
-    title: (
-      <span>
-        <Text strong>{group.title}</Text>
-        <Text type="secondary" className="task-tree-path">
-          {group.path}
-        </Text>
-      </span>
-    ),
-    key: group.id,
-    selectable: false,
-    children: group.tasks.map((task) => ({
-      title: (
-        <span className="task-tree-item">
-          <span>{task.title}</span>
-          {getStatusTag(statuses[task.id])}
-        </span>
-      ),
-      key: task.id,
-      isLeaf: true,
-    })),
-  }))
-}
-
-function getPassedCount(results: TaskCheck[]): number {
-  return results.filter((result) => result.passed).length
-}
-
-function App() {
+const App = () => {
   const [statuses, setStatuses] = useState<TaskStatuses>(() => getSavedStatuses())
   const treeData = useMemo(() => getTreeData(statuses), [statuses])
   const [selectedTaskId, setSelectedTaskId] = useState(tasks[0].id)
@@ -90,7 +26,7 @@ function App() {
   const [results, setResults] = useState<TaskCheck[]>([])
   const [showHint, setShowHint] = useState(false)
 
-  function selectTask(task: Task) {
+  const selectTask = (task: Task) => {
     setSelectedTaskId(task.id)
     setCode(getSavedCode(task))
     setResults([])
@@ -98,11 +34,11 @@ function App() {
   }
 
   useEffect(() => {
-    localStorage.setItem(`task-code:${selectedTask.id}`, code)
+    saveTaskCode(selectedTask.id, code)
   }, [code, selectedTask.id])
 
   useEffect(() => {
-    localStorage.setItem('task-statuses', JSON.stringify(statuses))
+    saveTaskStatuses(statuses)
   }, [statuses])
 
   const passedCount = getPassedCount(results)
@@ -159,16 +95,11 @@ function App() {
                     type="primary"
                     onClick={() => {
                       const nextResults = selectedTask.check(code)
-                      const nextStatus =
-                        nextResults.length > 0 &&
-                        getPassedCount(nextResults) === nextResults.length
-                          ? 'success'
-                          : 'failed'
 
                       setResults(nextResults)
                       setStatuses((currentStatuses) => ({
                         ...currentStatuses,
-                        [selectedTask.id]: nextStatus,
+                        [selectedTask.id]: getTaskStatus(nextResults),
                       }))
                     }}
                   >

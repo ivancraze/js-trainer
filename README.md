@@ -17,6 +17,9 @@ src/tasks/
   01-js-basics/
   02-modern-js/
   03-typescript-basics/
+  04-functions-objects/
+  05-async-js/
+  06-interview-practice/
 ```
 
 Внутри каждой папки могут находиться:
