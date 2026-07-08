@@ -89,6 +89,12 @@ const App = () => {
                 <Title level={2}>{selectedTask.title}</Title>
                 <Paragraph>{selectedTask.goal}</Paragraph>
                 <Paragraph>{selectedTask.description}</Paragraph>
+                {selectedTask.exampleCode && (
+                  <div className="task-example">
+                    <Text strong>Пример данных</Text>
+                    <pre>{selectedTask.exampleCode}</pre>
+                  </div>
+                )}
 
                 <Space wrap>
                   <Button
@@ -183,6 +189,12 @@ const App = () => {
                   <Text strong>solution.js</Text>
                   <Text type="secondary">Сохраняется в браузере</Text>
                 </div>
+                {selectedTask.exampleCode && (
+                  <div className="editor-example">
+                    <Text strong>Пример входных данных</Text>
+                    <pre>{selectedTask.exampleCode}</pre>
+                  </div>
+                )}
                 <TextArea
                   className="code-editor"
                   value={code}

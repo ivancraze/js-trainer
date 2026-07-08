@@ -11,6 +11,7 @@ export type Task = {
   title: string
   goal: string
   description: string
+  exampleCode?: string
   hint: string
   starterCode: string
   check: (code: string) => TaskCheck[]
@@ -263,6 +264,8 @@ const modernJsTasks: Task[] = [
     title: 'getPositiveNumbers',
     goal: 'Потренироваться использовать `filter`.',
     description: 'Напиши функцию `getPositiveNumbers`, которая оставляет в массиве только числа больше нуля.',
+    exampleCode: `const numbers = [-2, 0, 3]
+getPositiveNumbers(numbers) // [3]`,
     hint: 'Для каждого числа верни условие `number > 0`.',
     starterCode: `function getPositiveNumbers(numbers) {
   return numbers
@@ -279,6 +282,12 @@ const modernJsTasks: Task[] = [
     title: 'getUserNames',
     goal: 'Потренироваться использовать `map`.',
     description: 'Напиши функцию `getUserNames`, которая превращает массив пользователей в массив имен.',
+    exampleCode: `const users = [
+  { name: 'Ivan' },
+  { name: 'Anna' },
+]
+
+getUserNames(users) // ['Ivan', 'Anna']`,
     hint: 'Каждый объект пользователя содержит поле `name`.',
     starterCode: `function getUserNames(users) {
   return []
@@ -298,6 +307,8 @@ const modernJsTasks: Task[] = [
     title: 'countWords',
     goal: 'Потренироваться собирать объект-словарь.',
     description: 'Напиши функцию `countWords`, которая считает, сколько раз каждое слово встречается в массиве.',
+    exampleCode: `const words = ['js', 'ts', 'js']
+countWords(words) // { js: 2, ts: 1 }`,
     hint: 'Создай пустой объект и увеличивай счетчик для каждого слова.',
     starterCode: `function countWords(words) {
   return {}
@@ -375,6 +386,8 @@ const modernJsTasks: Task[] = [
     title: 'sumNumbers',
     goal: 'Потренироваться использовать `reduce`.',
     description: 'Напиши функцию `sumNumbers`, которая возвращает сумму чисел массива.',
+    exampleCode: `const numbers = [1, 2, 3]
+sumNumbers(numbers) // 6`,
     hint: 'Начальное значение аккумулятора должно быть `0`.',
     starterCode: `function sumNumbers(numbers) {
   return 0
@@ -391,6 +404,8 @@ const modernJsTasks: Task[] = [
     title: 'getAverage',
     goal: 'Потренироваться комбинировать сумму и длину массива.',
     description: 'Напиши функцию `getAverage`, которая возвращает среднее значение чисел. Для пустого массива верни `0`.',
+    exampleCode: `const numbers = [2, 4, 6]
+getAverage(numbers) // 4`,
     hint: 'Сначала посчитай сумму, затем раздели на `numbers.length`.',
     starterCode: `function getAverage(numbers) {
   return 0
@@ -407,6 +422,16 @@ const modernJsTasks: Task[] = [
     title: 'sortByAge',
     goal: 'Потренироваться сортировать массив объектов.',
     description: 'Напиши функцию `sortByAge`, которая возвращает пользователей, отсортированных по возрасту по возрастанию.',
+    exampleCode: `const users = [
+  { name: 'Ivan', age: 28 },
+  { name: 'Anna', age: 21 },
+]
+
+sortByAge(users)
+// [
+//   { name: 'Anna', age: 21 },
+//   { name: 'Ivan', age: 28 },
+// ]`,
     hint: 'Не меняй исходный массив: сначала сделай копию через spread или `slice()`.',
     starterCode: `function sortByAge(users) {
   return users
@@ -426,6 +451,8 @@ const modernJsTasks: Task[] = [
     title: 'flattenOnce',
     goal: 'Потренироваться разворачивать вложенный массив на один уровень.',
     description: 'Напиши функцию `flattenOnce`, которая превращает массив массивов в один общий массив.',
+    exampleCode: `const items = [[1, 2], [3]]
+flattenOnce(items) // [1, 2, 3]`,
     hint: 'Можно использовать `flat()` или `reduce` с `concat`.',
     starterCode: `function flattenOnce(items) {
   return items
@@ -445,6 +472,20 @@ const functionsAndObjectsTasks: Task[] = [
     title: 'groupBy',
     goal: 'Потренироваться группировать массив объектов.',
     description: 'Напиши функцию `groupBy`, которая принимает массив объектов и имя поля, а возвращает объект с группами по значению этого поля.',
+    exampleCode: `const users = [
+  { name: 'Ivan', role: 'admin' },
+  { name: 'Anna', role: 'user' },
+  { name: 'Oleg', role: 'admin' },
+]
+
+groupBy(users, 'role')
+// {
+//   admin: [
+//     { name: 'Ivan', role: 'admin' },
+//     { name: 'Oleg', role: 'admin' },
+//   ],
+//   user: [{ name: 'Anna', role: 'user' }],
+// }`,
     hint: 'Для каждого элемента возьми `item[key]` и положи элемент в массив с таким ключом.',
     starterCode: `function groupBy(items, key) {
   return {}
@@ -477,6 +518,8 @@ const functionsAndObjectsTasks: Task[] = [
     title: 'unique',
     goal: 'Потренироваться удалять дубликаты.',
     description: 'Напиши функцию `unique`, которая возвращает массив уникальных значений в порядке первого появления.',
+    exampleCode: `const values = [1, 2, 1, 3, 2]
+unique(values) // [1, 2, 3]`,
     hint: 'Можно использовать `Set`, но сохрани порядок элементов.',
     starterCode: `function unique(values) {
   return values
@@ -493,6 +536,8 @@ const functionsAndObjectsTasks: Task[] = [
     title: 'pick',
     goal: 'Потренироваться создавать новый объект из выбранных полей.',
     description: 'Напиши функцию `pick`, которая принимает объект и массив ключей, а возвращает новый объект только с этими ключами.',
+    exampleCode: `const user = { name: 'Ivan', age: 28, role: 'admin' }
+pick(user, ['name', 'age']) // { name: 'Ivan', age: 28 }`,
     hint: 'Не меняй исходный объект. Создай новый объект и копируй туда только нужные поля.',
     starterCode: `function pick(object, keys) {
   return {}
@@ -512,6 +557,8 @@ const functionsAndObjectsTasks: Task[] = [
     title: 'omit',
     goal: 'Потренироваться создавать объект без выбранных полей.',
     description: 'Напиши функцию `omit`, которая возвращает копию объекта без ключей из массива `keys`.',
+    exampleCode: `const user = { name: 'Ivan', age: 28, role: 'admin' }
+omit(user, ['role']) // { name: 'Ivan', age: 28 }`,
     hint: 'Пройди по ключам объекта и копируй только те, которых нет в `keys`.',
     starterCode: `function omit(object, keys) {
   return object
@@ -531,6 +578,9 @@ const functionsAndObjectsTasks: Task[] = [
     title: 'invertObject',
     goal: 'Потренироваться менять ключи и значения местами.',
     description: 'Напиши функцию `invertObject`, которая делает значения объекта ключами, а ключи значениями.',
+    exampleCode: `const names = { js: 'JavaScript', ts: 'TypeScript' }
+invertObject(names)
+// { JavaScript: 'js', TypeScript: 'ts' }`,
     hint: 'Используй `Object.entries()` и собери новый объект.',
     starterCode: `function invertObject(object) {
   return {}
@@ -550,6 +600,21 @@ const functionsAndObjectsTasks: Task[] = [
     title: 'mergeById',
     goal: 'Потренироваться объединять два массива объектов.',
     description: 'Напиши функцию `mergeById`, которая объединяет объекты из двух массивов по одинаковому `id`.',
+    exampleCode: `const users = [
+  { id: 1, name: 'Ivan' },
+  { id: 2, name: 'Anna' },
+]
+
+const roles = [
+  { id: 1, role: 'admin' },
+  { id: 2, role: 'user' },
+]
+
+mergeById(users, roles)
+// [
+//   { id: 1, name: 'Ivan', role: 'admin' },
+//   { id: 2, name: 'Anna', role: 'user' },
+// ]`,
     hint: 'Для каждого объекта из первого массива найди объект с таким же `id` во втором массиве.',
     starterCode: `function mergeById(left, right) {
   return left
@@ -746,6 +811,8 @@ const interviewTasks: Task[] = [
     title: 'twoSum',
     goal: 'Потренироваться искать пару значений.',
     description: 'Напиши функцию `twoSum`, которая возвращает индексы двух чисел, сумма которых равна `target`.',
+    exampleCode: `const numbers = [2, 7, 11, 15]
+twoSum(numbers, 9) // [0, 1]`,
     hint: 'Можно пройти массив один раз и хранить уже увиденные числа в объекте или Map.',
     starterCode: `function twoSum(numbers, target) {
   return []
@@ -794,6 +861,8 @@ const interviewTasks: Task[] = [
     title: 'findMissingNumber',
     goal: 'Потренироваться искать пропущенное число.',
     description: 'Напиши функцию `findMissingNumber`, которая получает массив чисел от `1` до `n` с одним пропуском и возвращает пропущенное число.',
+    exampleCode: `const numbers = [1, 2, 4]
+findMissingNumber(numbers, 4) // 3`,
     hint: 'Можно сравнить ожидаемую сумму `1..n` и фактическую сумму массива.',
     starterCode: `function findMissingNumber(numbers, n) {
   return 0
@@ -810,6 +879,8 @@ const interviewTasks: Task[] = [
     title: 'chunkArray',
     goal: 'Потренироваться разбивать массив на части.',
     description: 'Напиши функцию `chunkArray`, которая разбивает массив на подмассивы размера `size`.',
+    exampleCode: `const items = [1, 2, 3, 4, 5]
+chunkArray(items, 2) // [[1, 2], [3, 4], [5]]`,
     hint: 'Иди циклом с шагом `size` и используй `slice`.',
     starterCode: `function chunkArray(items, size) {
   return []
@@ -828,6 +899,8 @@ const typescriptTasks: Task[] = [
     title: 'getFirstItem',
     goal: 'Понять идею generic-функции через поведение.',
     description: 'Напиши функцию `getFirstItem`, которая возвращает первый элемент массива или `undefined`, если массив пустой.',
+    exampleCode: `const numbers = [10, 20]
+getFirstItem(numbers) // 10`,
     hint: 'Первый элемент массива находится по индексу `0`.',
     starterCode: `function getFirstItem(items) {
   return undefined
@@ -844,6 +917,13 @@ const typescriptTasks: Task[] = [
     title: 'filterActiveUsers',
     goal: 'Связать тип объекта с поведением функции.',
     description: 'Напиши функцию `filterActiveUsers`, которая оставляет только пользователей с `isActive: true`.',
+    exampleCode: `const users = [
+  { name: 'Ivan', isActive: true },
+  { name: 'Anna', isActive: false },
+]
+
+filterActiveUsers(users)
+// [{ name: 'Ivan', isActive: true }]`,
     hint: 'В TypeScript это была бы функция `(users: User[]) => User[]`, но в тренажере проверяем поведение.',
     starterCode: `function filterActiveUsers(users) {
   return users
@@ -880,6 +960,8 @@ const typescriptTasks: Task[] = [
     title: 'ensureArray',
     goal: 'Понять поведение функции, похожей на generic helper.',
     description: 'Напиши функцию `ensureArray`, которая возвращает значение как массив: если пришел массив, верни его; если одно значение, оберни в массив.',
+    exampleCode: `ensureArray(5) // [5]
+ensureArray([1, 2]) // [1, 2]`,
     hint: 'Проверь `Array.isArray(value)`.',
     starterCode: `function ensureArray(value) {
   return value
@@ -896,6 +978,8 @@ const typescriptTasks: Task[] = [
     title: 'getTaskLabel',
     goal: 'Потренироваться с discriminated union через поведение.',
     description: 'Напиши функцию `getTaskLabel`, которая возвращает подпись задачи по ее типу: `bug`, `feature` или `docs`.',
+    exampleCode: `const task = { type: 'bug' }
+getTaskLabel(task) // 'Bug'`,
     hint: 'Для неизвестного типа верни `Unknown`.',
     starterCode: `function getTaskLabel(task) {
   return 'Unknown'
