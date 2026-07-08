@@ -7,14 +7,14 @@ const { Text } = Typography
 
 export const getStatusTag = (status: TaskStatus | undefined) => {
   if (status === 'success') {
-    return <Tag color="success">Успешно</Tag>
+    return <Tag color="success">done</Tag>
   }
 
   if (status === 'failed') {
-    return <Tag color="error">Неуспешно</Tag>
+    return <Tag color="error">fail</Tag>
   }
 
-  return <Tag>Не проверено</Tag>
+  return <Tag>new</Tag>
 }
 
 export const getTreeData = (statuses: TaskStatuses): DataNode[] =>
@@ -32,7 +32,9 @@ export const getTreeData = (statuses: TaskStatuses): DataNode[] =>
     children: group.tasks.map((task) => ({
       title: (
         <span className="task-tree-item">
-          <span>{task.title}</span>
+          <span className="task-tree-title" title={task.title}>
+            {task.title}
+          </span>
           {getStatusTag(statuses[task.id])}
         </span>
       ),

@@ -185,6 +185,75 @@ const jsBasicsTasks: Task[] = [
         { title: 'Строка "js" не пустая', args: ['js'], expected: false },
       ]),
   },
+  {
+    id: '01-js-basics/is-odd',
+    groupId: '01-js-basics',
+    title: 'isOdd',
+    goal: 'Закрепить проверку числа через остаток от деления.',
+    description: 'Напиши функцию `isOdd`, которая возвращает `true`, если число нечетное.',
+    hint: 'Нечетное число дает остаток `1` или `-1` при делении на `2`.',
+    starterCode: `function isOdd(value) {
+  return false
+}`,
+    check: (code) =>
+      checkFunction(code, 'isOdd', [
+        { title: '5 является нечетным', args: [5], expected: true },
+        { title: '4 не является нечетным', args: [4], expected: false },
+        { title: '-3 является нечетным', args: [-3], expected: true },
+      ]),
+  },
+  {
+    id: '01-js-basics/clamp',
+    groupId: '01-js-basics',
+    title: 'clamp',
+    goal: 'Потренироваться ограничивать число диапазоном.',
+    description: 'Напиши функцию `clamp`, которая возвращает число внутри диапазона `min`-`max`.',
+    hint: 'Если число меньше `min`, верни `min`. Если больше `max`, верни `max`.',
+    starterCode: `function clamp(value, min, max) {
+  return value
+}`,
+    check: (code) =>
+      checkFunction(code, 'clamp', [
+        { title: '5 внутри диапазона 1-10', args: [5, 1, 10], expected: 5 },
+        { title: '-2 становится 0', args: [-2, 0, 10], expected: 0 },
+        { title: '15 становится 10', args: [15, 0, 10], expected: 10 },
+      ]),
+  },
+  {
+    id: '01-js-basics/get-grade',
+    groupId: '01-js-basics',
+    title: 'getGrade',
+    goal: 'Потренироваться писать цепочку условий.',
+    description: 'Напиши функцию `getGrade`, которая возвращает `A`, `B`, `C` или `D` по количеству баллов.',
+    hint: '`A` от 90, `B` от 75, `C` от 60, иначе `D`.',
+    starterCode: `function getGrade(score) {
+  return 'D'
+}`,
+    check: (code) =>
+      checkFunction(code, 'getGrade', [
+        { title: '95 дает A', args: [95], expected: 'A' },
+        { title: '80 дает B', args: [80], expected: 'B' },
+        { title: '64 дает C', args: [64], expected: 'C' },
+        { title: '20 дает D', args: [20], expected: 'D' },
+      ]),
+  },
+  {
+    id: '01-js-basics/factorial',
+    groupId: '01-js-basics',
+    title: 'factorial',
+    goal: 'Потренироваться использовать цикл для накопления результата.',
+    description: 'Напиши функцию `factorial`, которая возвращает произведение чисел от `1` до `n`. Для `0` верни `1`.',
+    hint: 'Начни с `result = 1` и умножай его на каждое число от `2` до `n`.',
+    starterCode: `function factorial(n) {
+  return 1
+}`,
+    check: (code) =>
+      checkFunction(code, 'factorial', [
+        { title: 'factorial(0) дает 1', args: [0], expected: 1 },
+        { title: 'factorial(4) дает 24', args: [4], expected: 24 },
+        { title: 'factorial(5) дает 120', args: [5], expected: 120 },
+      ]),
+  },
 ]
 
 const modernJsTasks: Task[] = [
@@ -300,6 +369,73 @@ const modernJsTasks: Task[] = [
       }
     },
   },
+  {
+    id: '02-modern-js/sum-numbers',
+    groupId: '02-modern-js',
+    title: 'sumNumbers',
+    goal: 'Потренироваться использовать `reduce`.',
+    description: 'Напиши функцию `sumNumbers`, которая возвращает сумму чисел массива.',
+    hint: 'Начальное значение аккумулятора должно быть `0`.',
+    starterCode: `function sumNumbers(numbers) {
+  return 0
+}`,
+    check: (code) =>
+      checkFunction(code, 'sumNumbers', [
+        { title: '[1, 2, 3] дает 6', args: [[1, 2, 3]], expected: 6 },
+        { title: 'Пустой массив дает 0', args: [[]], expected: 0 },
+      ]),
+  },
+  {
+    id: '02-modern-js/get-average',
+    groupId: '02-modern-js',
+    title: 'getAverage',
+    goal: 'Потренироваться комбинировать сумму и длину массива.',
+    description: 'Напиши функцию `getAverage`, которая возвращает среднее значение чисел. Для пустого массива верни `0`.',
+    hint: 'Сначала посчитай сумму, затем раздели на `numbers.length`.',
+    starterCode: `function getAverage(numbers) {
+  return 0
+}`,
+    check: (code) =>
+      checkFunction(code, 'getAverage', [
+        { title: '[2, 4, 6] дает 4', args: [[2, 4, 6]], expected: 4 },
+        { title: 'Пустой массив дает 0', args: [[]], expected: 0 },
+      ]),
+  },
+  {
+    id: '02-modern-js/sort-by-age',
+    groupId: '02-modern-js',
+    title: 'sortByAge',
+    goal: 'Потренироваться сортировать массив объектов.',
+    description: 'Напиши функцию `sortByAge`, которая возвращает пользователей, отсортированных по возрасту по возрастанию.',
+    hint: 'Не меняй исходный массив: сначала сделай копию через spread или `slice()`.',
+    starterCode: `function sortByAge(users) {
+  return users
+}`,
+    check: (code) =>
+      checkDeepFunction(code, 'sortByAge', [
+        {
+          title: 'Сортирует пользователей по возрасту',
+          args: [[{ name: 'Ivan', age: 28 }, { name: 'Anna', age: 21 }]],
+          expected: [{ name: 'Anna', age: 21 }, { name: 'Ivan', age: 28 }],
+        },
+      ]),
+  },
+  {
+    id: '02-modern-js/flatten-once',
+    groupId: '02-modern-js',
+    title: 'flattenOnce',
+    goal: 'Потренироваться разворачивать вложенный массив на один уровень.',
+    description: 'Напиши функцию `flattenOnce`, которая превращает массив массивов в один общий массив.',
+    hint: 'Можно использовать `flat()` или `reduce` с `concat`.',
+    starterCode: `function flattenOnce(items) {
+  return items
+}`,
+    check: (code) =>
+      checkArrayFunction(code, 'flattenOnce', [
+        { title: '[[1, 2], [3]] дает [1, 2, 3]', args: [[[1, 2], [3]]], expected: [1, 2, 3] },
+        { title: '[[], [1]] дает [1]', args: [[[], [1]]], expected: [1] },
+      ]),
+  },
 ]
 
 const functionsAndObjectsTasks: Task[] = [
@@ -367,6 +503,69 @@ const functionsAndObjectsTasks: Task[] = [
           title: 'Выбирает name и age',
           args: [{ name: 'Ivan', age: 28, role: 'admin' }, ['name', 'age']],
           expected: { name: 'Ivan', age: 28 },
+        },
+      ]),
+  },
+  {
+    id: '03-functions-objects/omit',
+    groupId: '03-functions-objects',
+    title: 'omit',
+    goal: 'Потренироваться создавать объект без выбранных полей.',
+    description: 'Напиши функцию `omit`, которая возвращает копию объекта без ключей из массива `keys`.',
+    hint: 'Пройди по ключам объекта и копируй только те, которых нет в `keys`.',
+    starterCode: `function omit(object, keys) {
+  return object
+}`,
+    check: (code) =>
+      checkDeepFunction(code, 'omit', [
+        {
+          title: 'Удаляет role из объекта',
+          args: [{ name: 'Ivan', age: 28, role: 'admin' }, ['role']],
+          expected: { name: 'Ivan', age: 28 },
+        },
+      ]),
+  },
+  {
+    id: '03-functions-objects/invert-object',
+    groupId: '03-functions-objects',
+    title: 'invertObject',
+    goal: 'Потренироваться менять ключи и значения местами.',
+    description: 'Напиши функцию `invertObject`, которая делает значения объекта ключами, а ключи значениями.',
+    hint: 'Используй `Object.entries()` и собери новый объект.',
+    starterCode: `function invertObject(object) {
+  return {}
+}`,
+    check: (code) =>
+      checkDeepFunction(code, 'invertObject', [
+        {
+          title: 'Меняет ключи и значения местами',
+          args: [{ js: 'JavaScript', ts: 'TypeScript' }],
+          expected: { JavaScript: 'js', TypeScript: 'ts' },
+        },
+      ]),
+  },
+  {
+    id: '03-functions-objects/merge-by-id',
+    groupId: '03-functions-objects',
+    title: 'mergeById',
+    goal: 'Потренироваться объединять два массива объектов.',
+    description: 'Напиши функцию `mergeById`, которая объединяет объекты из двух массивов по одинаковому `id`.',
+    hint: 'Для каждого объекта из первого массива найди объект с таким же `id` во втором массиве.',
+    starterCode: `function mergeById(left, right) {
+  return left
+}`,
+    check: (code) =>
+      checkDeepFunction(code, 'mergeById', [
+        {
+          title: 'Объединяет данные пользователей по id',
+          args: [
+            [{ id: 1, name: 'Ivan' }, { id: 2, name: 'Anna' }],
+            [{ id: 1, role: 'admin' }, { id: 2, role: 'user' }],
+          ],
+          expected: [
+            { id: 1, name: 'Ivan', role: 'admin' },
+            { id: 2, name: 'Anna', role: 'user' },
+          ],
         },
       ]),
   },
@@ -438,6 +637,71 @@ const asyncTasks: Task[] = [
       }
     },
   },
+  {
+    id: '04-async-js/wrap-in-promise',
+    groupId: '04-async-js',
+    title: 'wrapInPromise',
+    goal: 'Закрепить создание Promise из значения.',
+    description: 'Напиши функцию `wrapInPromise`, которая принимает значение и возвращает Promise с этим значением.',
+    hint: 'Используй `Promise.resolve(value)`.',
+    starterCode: `function wrapInPromise(value) {
+  return value
+}`,
+    check: (code) => {
+      try {
+        const scope = runCode(code, ['wrapInPromise'])
+        const candidate = scope.wrapInPromise
+
+        if (typeof candidate !== 'function') {
+          return [
+            {
+              title: 'Функция wrapInPromise найдена',
+              passed: false,
+              expected: 'function',
+              received: typeof candidate,
+            },
+          ]
+        }
+
+        const received = candidate('JS')
+
+        return [
+          {
+            title: 'Возвращает Promise',
+            passed: received instanceof Promise,
+            expected: 'Promise',
+            received: received instanceof Promise ? 'Promise' : typeof received,
+          },
+        ]
+      } catch (error) {
+        return [
+          {
+            title: 'Код выполняется без ошибки',
+            passed: false,
+            expected: 'без ошибки',
+            received: error instanceof Error ? error.message : 'неизвестная ошибка',
+          },
+        ]
+      }
+    },
+  },
+  {
+    id: '04-async-js/get-promise-status-label',
+    groupId: '04-async-js',
+    title: 'getPromiseStatusLabel',
+    goal: 'Потренироваться работать со строковыми статусами.',
+    description: 'Напиши функцию `getPromiseStatusLabel`, которая превращает `pending`, `fulfilled`, `rejected` в человекочитаемые подписи.',
+    hint: 'Можно использовать объект-словарь или `switch`.',
+    starterCode: `function getPromiseStatusLabel(status) {
+  return status
+}`,
+    check: (code) =>
+      checkFunction(code, 'getPromiseStatusLabel', [
+        { title: 'pending дает Loading', args: ['pending'], expected: 'Loading' },
+        { title: 'fulfilled дает Success', args: ['fulfilled'], expected: 'Success' },
+        { title: 'rejected дает Error', args: ['rejected'], expected: 'Error' },
+      ]),
+  },
 ]
 
 const interviewTasks: Task[] = [
@@ -490,6 +754,69 @@ const interviewTasks: Task[] = [
       checkArrayFunction(code, 'twoSum', [
         { title: '[2, 7, 11, 15], 9 дает [0, 1]', args: [[2, 7, 11, 15], 9], expected: [0, 1] },
         { title: '[3, 2, 4], 6 дает [1, 2]', args: [[3, 2, 4], 6], expected: [1, 2] },
+      ]),
+  },
+  {
+    id: '05-interview-practice/reverse-string',
+    groupId: '05-interview-practice',
+    title: 'reverseString',
+    goal: 'Размяться на базовой задаче со строкой.',
+    description: 'Напиши функцию `reverseString`, которая возвращает строку в обратном порядке.',
+    hint: 'Строку можно превратить в массив через `split("")`.',
+    starterCode: `function reverseString(value) {
+  return value
+}`,
+    check: (code) =>
+      checkFunction(code, 'reverseString', [
+        { title: 'abc дает cba', args: ['abc'], expected: 'cba' },
+        { title: 'JS дает SJ', args: ['JS'], expected: 'SJ' },
+      ]),
+  },
+  {
+    id: '05-interview-practice/are-anagrams',
+    groupId: '05-interview-practice',
+    title: 'areAnagrams',
+    goal: 'Потренироваться сравнивать строки после нормализации.',
+    description: 'Напиши функцию `areAnagrams`, которая проверяет, состоят ли две строки из одних и тех же букв.',
+    hint: 'Приведи строки к нижнему регистру, отсортируй буквы и сравни результат.',
+    starterCode: `function areAnagrams(a, b) {
+  return false
+}`,
+    check: (code) =>
+      checkFunction(code, 'areAnagrams', [
+        { title: 'listen и silent являются анаграммами', args: ['listen', 'silent'], expected: true },
+        { title: 'js и ts не являются анаграммами', args: ['js', 'ts'], expected: false },
+      ]),
+  },
+  {
+    id: '05-interview-practice/find-missing-number',
+    groupId: '05-interview-practice',
+    title: 'findMissingNumber',
+    goal: 'Потренироваться искать пропущенное число.',
+    description: 'Напиши функцию `findMissingNumber`, которая получает массив чисел от `1` до `n` с одним пропуском и возвращает пропущенное число.',
+    hint: 'Можно сравнить ожидаемую сумму `1..n` и фактическую сумму массива.',
+    starterCode: `function findMissingNumber(numbers, n) {
+  return 0
+}`,
+    check: (code) =>
+      checkFunction(code, 'findMissingNumber', [
+        { title: '[1, 2, 4], 4 дает 3', args: [[1, 2, 4], 4], expected: 3 },
+        { title: '[2, 3, 4], 4 дает 1', args: [[2, 3, 4], 4], expected: 1 },
+      ]),
+  },
+  {
+    id: '05-interview-practice/chunk-array',
+    groupId: '05-interview-practice',
+    title: 'chunkArray',
+    goal: 'Потренироваться разбивать массив на части.',
+    description: 'Напиши функцию `chunkArray`, которая разбивает массив на подмассивы размера `size`.',
+    hint: 'Иди циклом с шагом `size` и используй `slice`.',
+    starterCode: `function chunkArray(items, size) {
+  return []
+}`,
+    check: (code) =>
+      checkDeepFunction(code, 'chunkArray', [
+        { title: '[1, 2, 3, 4, 5], 2 дает [[1, 2], [3, 4], [5]]', args: [[1, 2, 3, 4, 5], 2], expected: [[1, 2], [3, 4], [5]] },
       ]),
   },
 ]
@@ -545,6 +872,55 @@ const typescriptTasks: Task[] = [
         { title: 'done остается done', args: ['done'], expected: 'done' },
         { title: 'unknown превращается в todo', args: ['unknown'], expected: 'todo' },
         { title: 'in-progress остается in-progress', args: ['in-progress'], expected: 'in-progress' },
+      ]),
+  },
+  {
+    id: '03-typescript-basics/ensure-array',
+    groupId: '03-typescript-basics',
+    title: 'ensureArray',
+    goal: 'Понять поведение функции, похожей на generic helper.',
+    description: 'Напиши функцию `ensureArray`, которая возвращает значение как массив: если пришел массив, верни его; если одно значение, оберни в массив.',
+    hint: 'Проверь `Array.isArray(value)`.',
+    starterCode: `function ensureArray(value) {
+  return value
+}`,
+    check: (code) =>
+      checkArrayFunction(code, 'ensureArray', [
+        { title: '5 превращается в [5]', args: [5], expected: [5] },
+        { title: '[1, 2] остается [1, 2]', args: [[1, 2]], expected: [1, 2] },
+      ]),
+  },
+  {
+    id: '03-typescript-basics/get-task-label',
+    groupId: '03-typescript-basics',
+    title: 'getTaskLabel',
+    goal: 'Потренироваться с discriminated union через поведение.',
+    description: 'Напиши функцию `getTaskLabel`, которая возвращает подпись задачи по ее типу: `bug`, `feature` или `docs`.',
+    hint: 'Для неизвестного типа верни `Unknown`.',
+    starterCode: `function getTaskLabel(task) {
+  return 'Unknown'
+}`,
+    check: (code) =>
+      checkFunction(code, 'getTaskLabel', [
+        { title: 'bug дает Bug', args: [{ type: 'bug' }], expected: 'Bug' },
+        { title: 'feature дает Feature', args: [{ type: 'feature' }], expected: 'Feature' },
+        { title: 'docs дает Documentation', args: [{ type: 'docs' }], expected: 'Documentation' },
+      ]),
+  },
+  {
+    id: '03-typescript-basics/get-role-permissions',
+    groupId: '03-typescript-basics',
+    title: 'getRolePermissions',
+    goal: 'Потренироваться ограничивать значения роли.',
+    description: 'Напиши функцию `getRolePermissions`, которая возвращает разрешения для ролей `admin`, `editor`, `viewer`.',
+    hint: '`admin`: `["read", "write", "delete"]`, `editor`: `["read", "write"]`, `viewer`: `["read"]`.',
+    starterCode: `function getRolePermissions(role) {
+  return []
+}`,
+    check: (code) =>
+      checkArrayFunction(code, 'getRolePermissions', [
+        { title: 'admin получает все права', args: ['admin'], expected: ['read', 'write', 'delete'] },
+        { title: 'viewer получает только чтение', args: ['viewer'], expected: ['read'] },
       ]),
   },
 ]

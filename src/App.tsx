@@ -52,7 +52,7 @@ const App = () => {
     <Layout className="trainer-shell">
       <Header className="trainer-header">
         <div>
-          <Title level={1}>New Life</Title>
+          <Title level={1}>JS/TS trainer</Title>
           <Text>Тренажер JavaScript и TypeScript задач</Text>
         </div>
       </Header>
