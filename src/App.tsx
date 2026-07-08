@@ -189,6 +189,42 @@ const App = () => {
                   spellCheck={false}
                   onChange={(event) => setCode(event.target.value)}
                 />
+                <div className="execution-output">
+                  <div className="execution-output-header">
+                    <Text strong>Результат выполнения</Text>
+                    {hasResults && (
+                      <Text type={isSolved ? 'success' : 'danger'}>
+                        {passedCount}/{results.length}
+                      </Text>
+                    )}
+                  </div>
+                  {hasResults ? (
+                    <ul className="execution-output-list">
+                      {results.map((result) => (
+                        <li
+                          className={
+                            result.passed
+                              ? 'execution-output-pass'
+                              : 'execution-output-fail'
+                          }
+                          key={result.title}
+                        >
+                          <span>{result.passed ? 'PASS' : 'FAIL'}</span>
+                          <span>{result.title}</span>
+                          {!result.passed && (
+                            <code>
+                              expected {result.expected}, received {result.received}
+                            </code>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <Text type="secondary">
+                      Нажми «Проверить», чтобы увидеть результат своей функции.
+                    </Text>
+                  )}
+                </div>
               </section>
             </Splitter.Panel>
           </Splitter>

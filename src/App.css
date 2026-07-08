@@ -178,6 +178,71 @@
   box-shadow: none;
 }
 
+.execution-output {
+  max-height: 220px;
+  overflow: auto;
+  padding: 14px;
+  color: #dbeafe;
+  background: #0b1220;
+  border-top: 1px solid #2b3443;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.execution-output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.execution-output-header .ant-typography,
+.execution-output .ant-typography {
+  color: #dbeafe;
+}
+
+.execution-output .ant-typography-secondary {
+  color: #93a4b8;
+}
+
+.execution-output-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.execution-output-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px 10px;
+  align-items: start;
+}
+
+.execution-output-list span:nth-child(2),
+.execution-output-list code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.execution-output-list code {
+  grid-column: 2;
+  padding: 2px 0;
+  color: #fca5a5;
+  background: transparent;
+}
+
+.execution-output-pass span:first-child {
+  color: #86efac;
+}
+
+.execution-output-fail span:first-child {
+  color: #fca5a5;
+}
+
 @media (max-width: 900px) {
   .trainer-body {
     flex-direction: column;
